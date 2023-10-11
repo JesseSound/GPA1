@@ -5,22 +5,56 @@ using UnityEngine;
 
 public class speeddetection : MonoBehaviour
 {
-    // Homework 4: Double the player's speed when they are on top of a speed-up area.
-    // Hint: compare gameObject.name with collision.gameObject.name to determine which two objects are overlapping.
+    public float playerSpeed;
+    public float playerPosX;
+    public float playerPosY;
+    public void Awake()
+    {
+        playerSpeed = gameObject.GetComponent<Player>().speed;
+        playerPosY = gameObject.GetComponent<Transform>().position.y;
+        playerPosX = gameObject.GetComponent<Transform>().position.x;
+    }
 
-        // Double speed on-enter
-        private void OnTriggerEnter2D(Collider2D collision)
+    // Double speed on-enter
+    private void OnTriggerEnter2D(Collider2D collision)
         {
+        if (collision.CompareTag("trap"))
+        {
+
+            
             Debug.Log(gameObject.name + " is triggered by " + collision.gameObject.name);
-            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+
+            gameObject.GetComponent<Player>().speed /= 2;
         }
+        if (collision.CompareTag("Heart"))
+        {
+
+
+            Debug.Log(gameObject.name + " is triggered by " + collision.gameObject.name);
+            gameObject.GetComponent<Player>().score += 1;
+            Destroy(collision.gameObject);
+            Debug.Log("Score is: " + gameObject.GetComponent<Player>().score);
+        }
+
+        if (collision.CompareTag("roses"))
+        {
+
+
+            Debug.Log(gameObject.name + " is triggered by " + collision.gameObject.name);
+            gameObject.GetComponent<Player>().lives -= 1;
+            transform.position =  new Vector3(-8.88f, 2.22f, -0.27f);
+
+
+        }
+
+    }
 
         // Reset to original speed on-exit
         private void OnTriggerExit2D(Collider2D collision)
         {
             Debug.Log(gameObject.name + " is no longer triggered by " + collision.gameObject.name);
-            gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
-            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
-        }
+
+            gameObject.GetComponent<Player>().speed = playerSpeed;
+
+    }
 }
