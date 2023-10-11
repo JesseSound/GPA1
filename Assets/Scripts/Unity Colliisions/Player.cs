@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI scoreTotal;
     Rigidbody2D rb;
     public TextMeshProUGUI heartCount;
+    public GameObject instructs;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         text.SetActive(false);
+        instructs.SetActive(true);
         gameObject.SetActive(true);
         scoreTotal.text = "Score: " + score.ToString();
         heartCount.text = "Hearts: " + lives.ToString();
@@ -39,7 +41,10 @@ public class Player : MonoBehaviour
             text.SetActive(true);
             gameObject.SetActive(false);
         }
-
+        if (Input.anyKey)
+        {
+            instructs.SetActive(false);
+        }
 
         //movement
         if (Input.GetKey(KeyCode.W))
