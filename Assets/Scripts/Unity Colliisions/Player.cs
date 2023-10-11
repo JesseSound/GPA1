@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         instructs.SetActive(true);
         gameObject.SetActive(true);
         scoreTotal.text = "Score: " + score.ToString();
-        heartCount.text = "Hearts: " + lives.ToString();
+        heartCount.text = "Lives: " + lives.ToString();
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     {
         //score and life count 
         scoreTotal.text = "Score: " + score.ToString();
-        heartCount.text = "Hearts: " + lives.ToString();
+        heartCount.text = "Lives: " + lives.ToString();
 
         //game over condition
         //<= 0 is there in case of glitching
